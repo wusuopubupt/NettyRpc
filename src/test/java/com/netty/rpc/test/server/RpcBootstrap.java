@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
-@ComponentScan(basePackages={"com.netty.rpc"})
+@ComponentScan(basePackages={"com.netty.rpc.server", "com.netty.rpc.registry", "com.netty.rpc.test.server"})
 //@ImportResource(locations = {"classpath:server-spring.xml"})
 public class RpcBootstrap {
     public static void main(String[] args) {
