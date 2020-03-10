@@ -11,6 +11,8 @@ import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  * 服务注册
@@ -18,13 +20,18 @@ import org.slf4j.LoggerFactory;
  * @author huangyong
  * @author luxiaoxun
  */
+@Component
 public class ServiceRegistry {
 
     private static final Logger logger = LoggerFactory.getLogger(ServiceRegistry.class);
 
     private CountDownLatch latch = new CountDownLatch(1);
 
+    @Value("${registry.address}")
     private String registryAddress;
+
+    public ServiceRegistry() {
+    }
 
     public ServiceRegistry(String registryAddress) {
         this.registryAddress = registryAddress;

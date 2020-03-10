@@ -24,19 +24,26 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 
 /**
  * RPC Server
  *
  * @author huangyong, luxiaoxun
  */
+@Component
 public class RpcServer implements ApplicationContextAware, InitializingBean {
 
     private static final Logger logger = LoggerFactory.getLogger(RpcServer.class);
 
+    @Value("${server.address}")
     private String serverAddress;
+
+    @Autowired
     private ServiceRegistry serviceRegistry;
 
     private Map<String, Object> handlerMap = new HashMap<>();
@@ -44,6 +51,9 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
 
     private EventLoopGroup bossGroup = null;
     private EventLoopGroup workerGroup = null;
+
+    public RpcServer() {
+    }
 
     public RpcServer(String serverAddress) {
         this.serverAddress = serverAddress;
